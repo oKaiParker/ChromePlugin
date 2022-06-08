@@ -14,14 +14,9 @@
     },
     "icons": {
       "16": "icon.png"
-    }
-    // "background":{
-    //     "service_worker":"js/background.js"
-    // },
-    // "permissions":["storage"],
-    // "content_scripts":[{
-    //     "js":["js/jquery-3.6.0.min.js","js/content.js","js/popup.js"],/*content可以随意引入js，因为其内容会在浏览的网页上直接运行*/
-    //     "matches":["*://localhost/*"],/*在哪些网页上运行*/
-    //     "run_at":"document_end"/* 在页面加载完成时运行 */
-    // }]
+    },
+    "background":{
+        "service_worker":"background.js"
+    },
+    "permissions":["storage"]
 }
