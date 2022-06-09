@@ -18,5 +18,10 @@
     "background":{
         "service_worker":"background.js"
     },
-    "permissions":["storage"]
+    "permissions":["storage"],
+    "content_scripts":[{
+        "js":["js/jquery-3.6.0.min.js","js/content.js"],/*content可以随意引入js，因为其内容会在浏览的网页上直接运行*/
+        "matches":["https://*/*"],/*在哪些网页上运行*/
+        "run_at":"document_start"/* document_end在页面加载完成时运行 */
+    }]
 }

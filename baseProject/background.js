@@ -36,3 +36,30 @@ chrome.runtime.onConnect.addListener(function(port) {//接收到popup
         }
     })
 });
+chrome.runtime.onMessage.addListener(function(senderRequest) {//接收到content
+    console.log("background onMessage:", senderRequest);
+	sendResponse({msg: '接收到content'});
+    if(senderRequest.fromContent&&senderRequest.fromContent=='getDB'){//接收到fromContent:getDB
+        DBdata('get',function(res){//从本地取数据
+            if(res.LocalDB){
+                var LocalDB=res.LocalDB;
+                switch(LocalDB.Direct){
+                //如果是存入的TEST按钮
+                    case 'TEST':
+                        chrome.tabs.query({active: true, currentWindow: true
+                        }, function(tabs){
+                            chrome.tabs.sendMessage(tabs[0].id, {LocalDB: LocalDB});//发送到content		
+                        });
+                    break;
+					//如果是存入的removeAD按钮
+                    case 'removeAD':
+                        chrome.tabs.query({active: true, currentWindow: true
+                        }, function(tabs){
+                            chrome.tabs.sendMessage(tabs[0].id, {LocalDB: LocalDB});//发送到content		
+                        });
+                    break;
+                }
+            }
+        });
+    }
+});
