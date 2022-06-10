@@ -8,6 +8,7 @@ function DBdata(mode,callback,data){//操作本地存储的函数
         chrome.storage.local.set({LocalDB: data});
     }else if(mode=="get"){//获取
         chrome.storage.local.get('LocalDB', function(response) {
+            console.log("DBdata response:", response);
             typeof callback == 'function' ? callback(response) : null;
         });
     }else if(mode=="clear"){//清空
@@ -38,17 +39,21 @@ chrome.runtime.onConnect.addListener(function(port) {//接收到popup
 });
 chrome.runtime.onMessage.addListener(function(senderRequest) {//接收到content
     console.log("background onMessage:", senderRequest);
-	sendResponse({msg: '接收到content'});
-    if(senderRequest.fromContent&&senderRequest.fromContent=='getDB'){//接收到fromContent:getDB
+	//sendResponse({msg: '接收到content'});
+    if(senderRequest.fromContent && senderRequest.fromContent=='getDB') {//接收到fromContent:getDB
         DBdata('get',function(res){//从本地取数据
+            console.log("background DBdata get:", res);
             if(res.LocalDB){
                 var LocalDB=res.LocalDB;
                 switch(LocalDB.Direct){
-                //如果是存入的TEST按钮
+                    //如果是存入的TEST按钮
                     case 'TEST':
-                        chrome.tabs.query({active: true, currentWindow: true
-                        }, function(tabs){
-                            chrome.tabs.sendMessage(tabs[0].id, {LocalDB: LocalDB});//发送到content		
+                        chrome.tabs.query({
+                                active: true, 
+                                currentWindow: true
+                            }, function(tabs) {
+                                console.log("query tabs:", tabs);                            
+                                chrome.tabs.sendMessage(tabs[0].id, {LocalDB: LocalDB});//发送到content		
                         });
                     break;
 					//如果是存入的removeAD按钮
