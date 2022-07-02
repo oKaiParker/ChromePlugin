@@ -1,31 +1,40 @@
 {
-    // 清单文件的版本，这个必须写，而且必须是2
-    "manifest_version": 3,
-    // 插件的名称
-    "name": "One-click Kittens",
-    // 插件描述
-    "description": "This extension demonstrates a browser action with kittens.",
-    // 插件的版本
-    "version": "1.0",
-    // 权限申请
-    "action": {
-      "default_title": "鼠标移上去提示文字",
-      "default_popup": "popup.html"
-    },
-    "icons": {
-      "16": "icon.png"
-    },
-    "background":{
-        "service_worker":"background.js"
-    },
-	"permissions":[
-        "storage", // 插件本地存储
-        "cookies"
-    ],/*增加cookie权限*/
-    "host_permissions":["https://*/*"], // "<all_urls>" 表示匹配所有地址
-    "content_scripts":[{
-        "js":["js/jquery-3.6.0.min.js","js/content.js"],/*content可以随意引入js，因为其内容会在浏览的网页上直接运行*/
-        "matches":["https://*/*"],// 在哪些网页上运行 "<all_urls>" 表示匹配所有地址
-        "run_at":"document_end"// 代码注入的时间，可选值： "document_start", "document_end", or "document_idle"，最后一个表示页面空闲时，默认document_idle
-    }]
+  // 清单文件的版本，这个必须写，而且必须是2
+  "manifest_version": 3,
+  // 插件的名称
+  "name": "One-click Kittens",
+  // 插件描述
+  "description": "This extension demonstrates a browser action with kittens.",
+  // 插件的版本
+  "version": "1.0",
+  // 权限申请
+  "action": {
+    "default_title": "鼠标移上去提示文字",
+    "default_popup": "html/popup.html"
+  },
+  "icons": {
+    "16": "icon.png"
+  },
+  "background": {
+    "service_worker": "background/background.js"
+  },
+  "permissions": [
+    "storage", // 插件本地存储
+    "cookies"
+  ], /*增加cookie权限*/
+  "host_permissions": [
+    "https://*/*"
+  ], // "<all_urls>" 表示匹配所有地址
+  "content_scripts": [
+    {
+      "js": [
+        "lib/jquery-3.6.0.min.js",
+        "content/content.js"
+      ], /*content可以随意引入js，因为其内容会在浏览的网页上直接运行*/
+      "matches": [
+        "https://*/*"
+      ], // 在哪些网页上运行 "<all_urls>" 表示匹配所有地址
+      "run_at": "document_end" // 代码注入的时间，可选值： "document_start", "document_end", or "document_idle"，最后一个表示页面空闲时，默认document_idle
+    }
+  ]
 }

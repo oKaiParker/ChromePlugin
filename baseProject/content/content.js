@@ -1,5 +1,5 @@
 //content.js   manifest匹配地址的页面在刷新时会直接执行这里的代码
-window.console.log('this is content js...');
+window.console.log('this is content js...', window.location);
 
 function DOMtoString(document_root) {
     console.log('html doc:', document_root);
