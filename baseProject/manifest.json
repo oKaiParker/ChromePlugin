@@ -19,8 +19,7 @@
     "service_worker": "background/background.js"
   },
   "permissions": [
-    "storage", // 插件本地存储
-    "cookies"
+    "storage" // 插件本地存储  "cookies"
   ], /*增加cookie权限*/
   "host_permissions": [
     "https://*/*"

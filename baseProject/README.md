@@ -9,3 +9,4 @@ background.js要放在主文件夹根目录，否则在使用过程中会出现 
 1. content可以注入浏览的网页，使用得当可以做出很多功能。
 2. 添加content 与 background 数据通讯。
 
+# 修改文件目录结构
